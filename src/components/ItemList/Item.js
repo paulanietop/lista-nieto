@@ -1,4 +1,4 @@
-import { Button, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import React from 'react'
@@ -26,9 +26,9 @@ const Item = ({item, setCheck, openModal}) => {
         />
       </View>
       { item.completed
-        ? <></>
+        ? <Text style={styles.doneText}>Done</Text>
         : <Pressable style={styles.itemButton} onPress={() => openModal(item)}> 
-            <Text style={styles.itemText} >Delete</Text>
+            <Text style={styles.deleteText} >Delete</Text>
           </Pressable>
       }
     </View>
@@ -60,8 +60,12 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     backgroundColor: 'transparent',
   },
-  itemText: {
+  deleteText: {
     color: 'red',
+    fontSize: 16
+  },
+  doneText: {
+    color: '#6358ec',
     fontSize: 16
   }
 });

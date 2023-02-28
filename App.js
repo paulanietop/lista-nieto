@@ -1,17 +1,28 @@
-import { FlatList, Modal, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { CustomModal, ItemInput, ListItem } from './src/components';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
-import Item from './src/components/Item';
 import { useState } from 'react';
 
 export default function App() {
-
+  
+  const [itemText, setItemText] = useState("")
+  const [items, setItems] = useState([])
   const [update, setUpdate] = useState(false);
-  const [items, setItems] = useState([{id: 1, name: 'Hola', completed: true}, {id: 2, name: 'Revisar correos', completed: false}])
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   
+  const onChangeText = (text) => {
+    setItemText(text)
+  }
+  
+  const addItemToList = () => {
+    const newItem = [...items, {id: Date.now(), name: itemText, completed: false}]
+    setItems(newItem)
+    setItemText("")
+  }
+
   const setCheck = (id, newValue) => {
-    const selectedCheckBoxes = items.find((cb) => cb.id === id);
+    const selectedCheckBoxes = items.find((checkbox) => checkbox.id === id);
     selectedCheckBoxes.completed = newValue
     setUpdate(!update)
   }
@@ -23,12 +34,12 @@ export default function App() {
   };
 
   const onCancelModal = () => {
-    setModalVisible(!modalVisible);
+    setModalVisible(false);
   };
 
   const onDeleteModal = (id) => {
-    setModalVisible(!modalVisible);
-    setItems((oldArry) => oldArry.filter((item) => item.id !== id));
+    setModalVisible(false);
+    setItems((oldArray) => oldArray.filter((item) => item.id !== id));
     setSelectedItem(null);
   };
 
@@ -36,47 +47,26 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <Text style={styles.title}>TO DO List</Text>
+        <ItemInput 
+          onChangeText={onChangeText}
+          itemText={itemText}
+          addItemToList={addItemToList}
+        />
         <View
           style={styles.divider}
         />
-        <FlatList
-          data={items}
-          renderItem={item => {
-            return (
-              <View>
-                <Item item={item.item} setCheck={setCheck} openModal={openModal}/>
-              </View>
-            )
-          }}
-          keyExtractor={(item) => item.id}
-          extraData={update}
+        <ListItem
+          items={items}
+          update={update}
+          setCheck={setCheck}
+          openModal={openModal}
         />
-        <Modal animationType='slide' transparent={true} visible={modalVisible}>
-          <View style={styles.modalMainView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>
-                Are you sure you want to delete the task "
-                <Text style={styles.modalBoldText}>{selectedItem?.name}</Text>"?
-              </Text>
-              <View style={styles.modalActions}>
-                <Pressable
-                  style={[styles.button, styles.buttonCancel]}
-                  onPress={onCancelModal}
-                >
-                  <Text style={{...styles.modalBoldText, color: '#6358ec'}}>Cancel</Text>
-                </Pressable>
-                <Pressable
-                  style={[styles.button, styles.buttonDelete]}
-                  onPress={() => {
-                    onDeleteModal(selectedItem.id);
-                  }}
-                >
-                  <Text style={{...styles.modalBoldText, color: 'white'}}>Delete</Text>
-                </Pressable>
-              </View>
-            </View>
-          </View>
-        </Modal>
+        <CustomModal 
+          selectedItem={selectedItem}
+          onCancelModal={onCancelModal}
+          onDeleteModal={onDeleteModal}
+          modalVisible={modalVisible}
+        />
       </View>
     </SafeAreaView>
   );
@@ -98,46 +88,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center'
   },
-  modalMainView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.7)'
-  },
-  modalView: {
-    margin: 50,
-    width: '60%',
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 20,
-    alignItems: 'center',
-  },
-  modalText: {
-    marginBottom: 20,
-    fontSize: 15,
-    textAlign: 'center',
-  },
-  modalBoldText: {
-    fontWeight: 'bold',
-  },
-  modalActions: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  button: {
-    borderRadius: 10,
-    padding: 10,
-    marginHorizontal: 10,
-  },
-  buttonCancel: {
-    borderColor: '#6358ec',
-    borderWidth: 1,
-    color: '#6358ec',
-  },
-  buttonDelete: {
-    backgroundColor: '#f44336',
-  },
-  textStyle: {
-
-  }
 });
