@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import Colors from '../../constants/Colors';
 import React from 'react'
 
 const Item = ({item, setCheck, openModal}) => {
@@ -18,10 +19,11 @@ const Item = ({item, setCheck, openModal}) => {
         <BouncyCheckbox
           isChecked={item.completed}
           size={20}
-          fillColor="#6358ec"
+          fillColor={Colors.primary}
           unfillColor="#FFFFFF"
           text={item.name}
-          innerIconStyle={{borderWidth: 2, borderColor: item.completed ? "#6358ec" : '#c5ced8'}}
+          fontFamily="raleway"
+          innerIconStyle={{borderWidth: 2, borderColor: item.completed ? Colors.primary : Colors.secondary}}
           onPress={(isChecked) => setCheck(item.id, isChecked)}
         />
       </View>
@@ -46,11 +48,11 @@ const styles = StyleSheet.create({
     borderWidth: 2
   },
   itemUnchecked: {
-    borderColor: '#c5ced8',
+    borderColor: Colors.secondary,
   },
   itemChecked: {
-    borderColor: "#6358ec",
-    backgroundColor: "#dee0fa",
+    borderColor: Colors.primary,
+    backgroundColor: Colors.background,
   },
   row: {
     flex: 1,
@@ -61,11 +63,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   deleteText: {
-    color: 'red',
-    fontSize: 16
+    color: Colors.danger,
+    fontFamily: 'raleway',
+    fontSize: 16,
   },
   doneText: {
-    color: '#6358ec',
-    fontSize: 16
+    color: Colors.primary,
+    fontFamily: 'raleway',
+    fontSize: 16,
   }
 });

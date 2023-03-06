@@ -1,9 +1,25 @@
-import { CustomModal, ItemInput, ListItem } from './src/components';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import * as SplashScreen from 'expo-splash-screen';
 
-import { useState } from 'react';
+import { CustomModal, Divider, ItemInput, ListItem } from './src/components';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+
+import { useFonts } from 'expo-font';
 
 export default function App() {
+
+  const [fontsLoaded] = useFonts({
+    'raleway': require('./assets/fonts/Raleway-Regular.ttf'),
+    'raleway-bold': require('./assets/fonts/Raleway-Bold.ttf'),
+    'raleway-600': require('./assets/fonts/Raleway-SemiBold.ttf'),
+  });
+
+  useEffect(() =>{
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+
+  }, [fontsLoaded])
   
   const [itemText, setItemText] = useState("")
   const [items, setItems] = useState([])
@@ -42,7 +58,10 @@ export default function App() {
     setItems((oldArray) => oldArray.filter((item) => item.id !== id));
     setSelectedItem(null);
   };
-
+  
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
@@ -52,9 +71,7 @@ export default function App() {
           itemText={itemText}
           addItemToList={addItemToList}
         />
-        <View
-          style={styles.divider}
-        />
+        <Divider/>
         <ListItem
           items={items}
           update={update}
@@ -77,15 +94,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 30,
   },
-  divider: {
-    borderBottomColor: '#a1acb9',
-    width: '80%',
-    alignSelf: 'center',
-    marginVertical: 20,
-    borderBottomWidth: 1.5,
-  },
   title: {
+    fontFamily: 'raleway',
     fontSize: 20,
-    textAlign: 'center'
+    textAlign: 'center',
   },
 });

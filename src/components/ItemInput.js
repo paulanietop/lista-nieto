@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
+import Colors from '../constants/Colors';
 import React from 'react'
 
 const ItemInput = ({onChangeText, itemText, addItemToList}) => {
@@ -17,6 +18,7 @@ const ItemInput = ({onChangeText, itemText, addItemToList}) => {
       >
         <Text style={styles.buttonText}>Add</Text>
       </Pressable>
+      
     </View>
   )
 }
@@ -31,20 +33,21 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   input: {
-    padding: 10,
-    borderColor: '#c5ced8',
-    borderWidth: 2,
-    width: '70%',
+    borderColor: Colors.secondary,
     borderRadius: 5,
+    borderWidth: 2,
+    fontFamily: 'raleway',
+    padding: 10,
+    width: '70%',
   },
   button: {
-    backgroundColor: '#6358ec',
+    backgroundColor: Colors.primary,
+    borderRadius: 5,
     padding: 10,
-    borderRadius: 5
   },
   buttonText: {
-    fontSize: 16,
     color: 'white',
-    fontWeight: '600',
-  }
+    fontFamily: 'raleway-600',
+    fontSize: 16,
+  },
 })

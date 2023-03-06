@@ -1,5 +1,6 @@
 import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 
+import Colors from '../constants/Colors';
 import React from 'react'
 
 const CustomModal = ({selectedItem, onCancelModal, onDeleteModal, modalVisible}) => {
@@ -16,7 +17,7 @@ const CustomModal = ({selectedItem, onCancelModal, onDeleteModal, modalVisible})
               style={[styles.button, styles.buttonCancel]}
               onPress={onCancelModal}
             >
-              <Text style={{...styles.modalBoldText, color: '#6358ec'}}>Cancel</Text>
+              <Text style={{...styles.modalBoldText, color: Colors.primary}}>Cancel</Text>
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonDelete]}
@@ -51,12 +52,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalText: {
-    marginBottom: 20,
+    fontFamily: 'raleway',
     fontSize: 15,
+    marginBottom: 20,
     textAlign: 'center',
   },
   modalBoldText: {
-    fontWeight: 'bold',
+    fontFamily: 'raleway-bold',
   },
   modalActions: {
     flexDirection: 'row',
@@ -68,11 +70,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   buttonCancel: {
-    borderColor: '#6358ec',
+    borderColor: Colors.primary,
     borderWidth: 1,
-    color: '#6358ec',
+    color: Colors.primary,
   },
   buttonDelete: {
-    backgroundColor: '#f44336',
+    backgroundColor: Colors.danger,
   },
 })
