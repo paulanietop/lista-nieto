@@ -1,5 +1,6 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, TextInput, View } from 'react-native';
 
+import Button from './Button';
 import Colors from '../constants/Colors';
 import React from 'react'
 
@@ -12,13 +13,11 @@ const ItemInput = ({onChangeText, itemText, addItemToList}) => {
         onChangeText={onChangeText}
         value={itemText}
       />
-      <Pressable 
-        onPress={addItemToList} 
+      <Button
         style={styles.button}
-      >
-        <Text style={styles.buttonText}>Add</Text>
-      </Pressable>
-      
+        onPress={addItemToList}
+        text="Add"
+      />
     </View>
   )
 }
@@ -41,13 +40,6 @@ const styles = StyleSheet.create({
     width: '70%',
   },
   button: {
-    backgroundColor: Colors.primary,
-    borderRadius: 5,
-    padding: 10,
-  },
-  buttonText: {
-    color: 'white',
-    fontFamily: 'raleway-600',
-    fontSize: 16,
+    marginLeft: 20,
   },
 })
