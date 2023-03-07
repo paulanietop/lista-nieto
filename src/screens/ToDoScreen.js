@@ -17,7 +17,6 @@ const ToDoScreen = ({finishToDo, projectID}) => {
   }
   
   const addItemToList = () => {
-    console.log(projectID)
     const newItem = [...items, {id: Date.now(), name: itemText, completed: false}]
     setItems(newItem)
     setItemText("")
@@ -30,7 +29,6 @@ const ToDoScreen = ({finishToDo, projectID}) => {
   }
 
   const openModal = (item) => {
-    console.log(item)
     setSelectedItem(item);
     setModalVisible(true);
   };

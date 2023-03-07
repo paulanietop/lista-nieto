@@ -33,7 +33,6 @@ export default function App() {
   }
 
   const finishToDo = (id) => {
-    console.log(id)
     const currentProject = projects.find((item) => item.id === id);
     currentProject.status = true;
     setProyect({});
@@ -48,7 +47,7 @@ export default function App() {
       <Header title={!switchScreen ? "Projects" : project.title}/>
       { 
         !switchScreen
-        ? <ProjectScreen startToDo={startToDo} projects={projects} switchScreen={switchScreen}/>
+        ? <ProjectScreen startToDo={startToDo} projects={projects}/>
         : <ToDoScreen finishToDo={finishToDo} projectID={project.id}/>
       }
     </View>

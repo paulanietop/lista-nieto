@@ -4,26 +4,23 @@ import { Button } from '../components/index'
 import Colors from '../constants/Colors'
 import React from 'react'
 
-const ProjectScreen = ({startToDo, projects, switchScreen}) => {  
+const ProjectScreen = ({startToDo, projects}) => {  
   return (
     <View style={styles.container}>
     <FlatList
       data={projects}
       renderItem={project => {
-        console.log(project.item)
         return (
           <View style={styles.item}>
             <Text style={styles.itemText}>{project.item.title}</Text>
             {
-              project.item.status
-              ? <Text style={styles.buttonText}>Completed</Text>
-              : <Button onPress={() => startToDo(project.item)} text="Start"/>
+              !project.item.status
+              && <Button onPress={() => startToDo(project.item)} text="Start"/>
             }  
           </View>
         )
       }}
       keyExtractor={(project) => project.id}
-      extraData={switchScreen}
     />
     </View>
   )
