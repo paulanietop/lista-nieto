@@ -1,7 +1,7 @@
 import { StyleSheet, TextInput, View } from 'react-native';
 
 import Button from './Button';
-import Colors from '../constants/Colors';
+import {COLORS} from '../constants/Colors';
 import React from 'react'
 
 const ItemInput = ({onChangeText, itemText, addItemToList}) => {
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   input: {
-    borderColor: Colors.secondary,
+    borderColor: COLORS.secondary,
     borderRadius: 5,
     borderWidth: 2,
     fontFamily: 'raleway',

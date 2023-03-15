@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native'
 
-import Colors from '../constants/Colors'
+import {COLORS} from '../constants/Colors'
 import React from 'react'
 
 const Divider = () => {
@@ -14,7 +14,7 @@ export default Divider
 const styles = StyleSheet.create({
   divider: {
     alignSelf: 'center',
-    borderBottomColor: Colors.lightGrey,
+    borderBottomColor: COLORS.lightGrey,
     borderBottomWidth: 1.5,
     marginVertical: 20,
     width: '80%',    

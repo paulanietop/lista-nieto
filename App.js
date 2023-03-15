@@ -3,9 +3,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StyleSheet, View } from 'react-native';
 import { useEffect, useState } from 'react';
 
-import { Header } from './src/components';
-import ProjectScreen from './src/screens/ProjectScreen';
-import ToDoScreen from './src/screens/ToDoScreen';
+import OrganizeNavigator from './src/navigators/OrganizeNavigator';
 import { useFonts } from 'expo-font';
 
 export default function App() {
@@ -23,34 +21,11 @@ export default function App() {
 
   }, [fontsLoaded])
   
-  const projects = [{id: 1, title: 'Work', status: false}, {id: 2, title: 'Personal', status: false}]
-  const [switchScreen, setSwitchScreen] = useState(false)
-  const [project, setProyect] = useState({})
-
-  const startToDo = (currentProject) => {
-    setProyect(currentProject)
-    setSwitchScreen(true)
-  }
-
-  const finishToDo = (id) => {
-    const currentProject = projects.find((item) => item.id === id);
-    currentProject.status = true;
-    setProyect({});
-    setSwitchScreen(false)
-  }
-
   if (!fontsLoaded) {
     return null;
   }
   return (
-    <View style={styles.container}>
-      <Header title={!switchScreen ? "Projects" : project.title}/>
-      { 
-        !switchScreen
-        ? <ProjectScreen startToDo={startToDo} projects={projects}/>
-        : <ToDoScreen finishToDo={finishToDo} projectID={project.id}/>
-      }
-    </View>
+    <OrganizeNavigator/>
   );
 }
 

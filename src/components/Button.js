@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text } from 'react-native'
 
-import Colors from '../constants/Colors'
+import {COLORS} from '../constants/Colors'
 import React from 'react'
 
 const Button = ({onPress, style, text}) => {
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   button: {
-    backgroundColor: Colors.primary,
+    backgroundColor: COLORS.primary,
     borderRadius: 5,
     padding: 10,
     flex: 1

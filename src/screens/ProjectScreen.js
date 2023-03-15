@@ -1,10 +1,16 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 
 import { Button } from '../components/index'
-import Colors from '../constants/Colors'
+import {COLORS} from '../constants/Colors'
 import React from 'react'
 
-const ProjectScreen = ({startToDo, projects}) => {  
+const ProjectScreen = ({navigation}) => {
+  const projects = [
+    {id: 1, title: 'Work', status: false}, 
+    {id: 2, title: 'Personal', status: false},
+    {id: 3, title: '2023 Goals', status: false}
+  ]
+
   return (
     <View style={styles.container}>
     <FlatList
@@ -15,7 +21,7 @@ const ProjectScreen = ({startToDo, projects}) => {
             <Text style={styles.itemText}>{project.item.title}</Text>
             {
               !project.item.status
-              && <Button onPress={() => startToDo(project.item)} text="Start"/>
+              && <Button onPress={() => navigation.navigate('ToDo')} text="Start"/>
             }  
           </View>
         )
@@ -47,6 +53,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     flex: 1,
     flexDirection: 'row',
-    borderColor: Colors.secondary,
+    borderColor: COLORS.secondary,
   },
 })

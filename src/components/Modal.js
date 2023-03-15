@@ -1,31 +1,40 @@
 import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 
-import Colors from '../constants/Colors';
+import {COLORS} from '../constants/Colors';
 import React from 'react'
 
-const CustomModal = ({selectedItem, onCancelModal, onDeleteModal, modalVisible}) => {
+const CustomModal = ({selectedItem, onCancelModal, onDeleteModal, modalVisible, deleteAll}) => {
+  const modalTitle = deleteAll 
+    ? <Text style={styles.modalText}>
+        Are you sure you want to delete 
+        <Text style={styles.modalBoldText}> all the tasks</Text>?
+      </Text>
+    : <Text style={styles.modalText}>
+        Are you sure you want to delete the task "
+        <Text style={styles.modalBoldText}>{selectedItem?.name}</Text>"?
+      </Text>
+  
+  const modalButton = deleteAll ? 'Delete all' : 'Delete'
+  
   return (
     <Modal animationType='slide' transparent={true} visible={modalVisible}>
       <View style={styles.modalMainView}>
         <View style={styles.modalView}>
-          <Text style={styles.modalText}>
-            Are you sure you want to delete the task "
-            <Text style={styles.modalBoldText}>{selectedItem?.name}</Text>"?
-          </Text>
+          {modalTitle}
           <View style={styles.modalActions}>
             <Pressable
               style={[styles.button, styles.buttonCancel]}
               onPress={onCancelModal}
             >
-              <Text style={{...styles.modalBoldText, color: Colors.primary}}>Cancel</Text>
+              <Text style={{...styles.modalBoldText, color: COLORS.primary}}>Cancel</Text>
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonDelete]}
               onPress={() => {
-                onDeleteModal(selectedItem.id);
+                onDeleteModal(selectedItem?.id, deleteAll);
               }}
             >
-              <Text style={{...styles.modalBoldText, color: 'white'}}>Delete</Text>
+              <Text style={{...styles.modalBoldText, color: 'white'}}>{modalButton}</Text>
             </Pressable>
           </View>
         </View>
@@ -70,11 +79,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   buttonCancel: {
-    borderColor: Colors.primary,
+    borderColor: COLORS.primary,
     borderWidth: 1,
-    color: Colors.primary,
+    color: COLORS.primary,
   },
   buttonDelete: {
-    backgroundColor: Colors.danger,
+    backgroundColor: COLORS.danger,
   },
 })

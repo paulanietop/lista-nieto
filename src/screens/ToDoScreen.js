@@ -1,16 +1,17 @@
 import { Button, Card, CustomModal, Divider, ItemInput, ListItem } from '../components/index.js';
 import { StyleSheet, View } from 'react-native'
 
-import Colors from '../constants/Colors';
+import {COLORS} from '../constants/Colors';
 import { useState } from 'react';
 
-const ToDoScreen = ({finishToDo, projectID}) => {
+const ToDoScreen = ({navigation}) => {
 
   const [itemText, setItemText] = useState("")
   const [items, setItems] = useState([])
   const [update, setUpdate] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [deleteAll, setDeleteAll] = useState(false);
   
   const onChangeText = (text) => {
     setItemText(text)
@@ -23,12 +24,14 @@ const ToDoScreen = ({finishToDo, projectID}) => {
   }
 
   const setCheck = (id, newValue) => {
+    setModalType('deleteOne')
     const selectedCheckBoxes = items.find((checkbox) => checkbox.id === id);
     selectedCheckBoxes.completed = newValue
     setUpdate(!update)
   }
 
-  const openModal = (item) => {
+  const openModal = (item, deleteAll) => {
+    setDeleteAll(deleteAll)
     setSelectedItem(item);
     setModalVisible(true);
   };
@@ -37,9 +40,15 @@ const ToDoScreen = ({finishToDo, projectID}) => {
     setModalVisible(false);
   };
 
-  const onDeleteModal = (id) => {
+  const onDeleteModal = (id, deleteAll) => {
     setModalVisible(false);
-    setItems((oldArray) => oldArray.filter((item) => item.id !== id));
+    
+    if(deleteAll) {
+      setItems([])
+    }
+    else {
+      setItems((oldArray) => oldArray.filter((item) => item.id !== id));
+    }
     setSelectedItem(null);
   };
 
@@ -52,24 +61,29 @@ const ToDoScreen = ({finishToDo, projectID}) => {
         addItemToList={addItemToList}
       />
       <Divider/>
-      <Card style={styles.card}>
-        <ListItem
-          items={items}
-          update={update}
-          setCheck={setCheck}
-          openModal={openModal}
-        />
-        <View style={styles.buttonsContainer}>
-          <Button onPress={() => setItems([])} text="Clean" style={styles.buttonClean}/>
-          <Button onPress={() => finishToDo(projectID)} text="Complete" style={styles.buttonComplete}/>
-        </View>
-      </Card>
+      {
+        items.length !== 0 &&
+        <Card style={styles.card}>
+          <View style={styles.buttonsContainer}>
+            <Button onPress={() => openModal(null, true)} text="Clean" style={styles.buttonClean}/>
+            <Button onPress={() => navigation.goBack()} text="Complete" style={styles.buttonComplete}/>
+          </View>
+          <ListItem
+            items={items}
+            update={update}
+            setCheck={setCheck}
+            openModal={openModal}
+          />
+        </Card>
+      }
       <CustomModal 
         selectedItem={selectedItem}
         onCancelModal={onCancelModal}
         onDeleteModal={onDeleteModal}
         modalVisible={modalVisible}
+        deleteAll={deleteAll}
       />
+      
     </View>
   )
 }
@@ -87,15 +101,15 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 20,
+    marginVertical: 20,
     width: '100%',
   },
   buttonClean: {
     marginRight: '10%',
-    backgroundColor: Colors.danger,
+    backgroundColor: COLORS.danger,
   },
   buttonComplete: {
     marginLeft: '10%',
-    backgroundColor: Colors.primary,
+    backgroundColor: COLORS.primary,
   },
 })

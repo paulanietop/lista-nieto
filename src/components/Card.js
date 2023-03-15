@@ -14,16 +14,18 @@ const Card = ({style, children}) => {
 export default Card
 
 const styles = StyleSheet.create({
-    cardContainer:{
-        shadowColor: 'black',
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowRadius: 6,
-        shadowOpacity: 0.26,
-        elevation: 5,
-        borderRadius: 10,
-        backgroundColor: 'white'
-    }
+  cardContainer:{
+    flex: 1,
+    marginBottom: 20,
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowRadius: 6,
+    shadowOpacity: 0.26,
+    elevation: 5,
+    borderRadius: 10,
+    backgroundColor: 'white'
+  }
 })
