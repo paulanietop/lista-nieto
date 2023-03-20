@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import {COLORS} from '../../constants/Colors';
+import { FontAwesome } from '@expo/vector-icons';
 import React from 'react'
 
 const Item = ({item, setCheck, openModal}) => {
@@ -28,9 +29,9 @@ const Item = ({item, setCheck, openModal}) => {
         />
       </View>
       { item.completed
-        ? <Text style={styles.doneText}>Done</Text>
+        ? <FontAwesome name="calendar-check-o" size={24} color={COLORS.primary} />
         : <Pressable style={styles.itemButton} onPress={() => openModal(item, false)}> 
-            <Text style={styles.deleteText} >Delete</Text>
+            <FontAwesome name="trash" size={23} color={COLORS.danger}/>
           </Pressable>
       }
     </View>
@@ -62,14 +63,4 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     backgroundColor: 'transparent',
   },
-  deleteText: {
-    color: COLORS.danger,
-    fontFamily: 'raleway',
-    fontSize: 16,
-  },
-  doneText: {
-    color: COLORS.primary,
-    fontFamily: 'raleway',
-    fontSize: 16,
-  }
 });

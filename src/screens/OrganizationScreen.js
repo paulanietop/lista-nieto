@@ -35,7 +35,7 @@ const OrganizationScreen = ({navigation}) => {
         </TouchableOpacity>
         
         <TouchableOpacity style={styles.menuBox}>
-          <Text style={styles.menuText}>Metrics</Text>
+          <Text style={styles.menuText}>Anniversaries</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -24,7 +24,6 @@ const ToDoScreen = ({navigation}) => {
   }
 
   const setCheck = (id, newValue) => {
-    setModalType('deleteOne')
     const selectedCheckBoxes = items.find((checkbox) => checkbox.id === id);
     selectedCheckBoxes.completed = newValue
     setUpdate(!update)

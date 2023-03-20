@@ -3,7 +3,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StyleSheet, View } from 'react-native';
 import { useEffect, useState } from 'react';
 
-import OrganizeNavigator from './src/navigators/OrganizeNavigator';
+import MainNavigator from './src/navigators/MainNavigator';
 import { useFonts } from 'expo-font';
 
 export default function App() {
@@ -25,7 +25,7 @@ export default function App() {
     return null;
   }
   return (
-    <OrganizeNavigator/>
+    <MainNavigator/>
   );
 }
 

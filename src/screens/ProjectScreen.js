@@ -11,6 +11,10 @@ const ProjectScreen = ({navigation}) => {
     {id: 3, title: '2023 Goals', status: false}
   ]
 
+  const handleNavigation = (title) => {
+    navigation.navigate('ToDo', { toDoName: title })
+  }
+
   return (
     <View style={styles.container}>
     <FlatList
@@ -21,7 +25,7 @@ const ProjectScreen = ({navigation}) => {
             <Text style={styles.itemText}>{project.item.title}</Text>
             {
               !project.item.status
-              && <Button onPress={() => navigation.navigate('ToDo')} text="Start"/>
+              && <Button onPress={() => handleNavigation(project.item.title)} text="Start"/>
             }  
           </View>
         )
