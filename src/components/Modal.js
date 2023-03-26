@@ -31,7 +31,7 @@ const CustomModal = ({selectedItem, onCancelModal, onDeleteModal, modalVisible, 
             <Pressable
               style={[styles.button, styles.buttonDelete]}
               onPress={() => {
-                onDeleteModal(selectedItem?.id, deleteAll);
+                onDeleteModal(deleteAll);
               }}
             >
               <Text style={{...styles.modalBoldText, color: 'white'}}>{modalButton}</Text>

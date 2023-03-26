@@ -1,48 +1,61 @@
 import { Button, Card, CustomModal, Divider, ItemInput, ListItem } from '../components/index.js';
 import { StyleSheet, View } from 'react-native'
+import { createTask, filteredTask, removeAllTasks, removeTask, selectTask } from '../store/actions/task.action.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 import {COLORS} from '../constants/Colors';
-import { filteredTask } from '../store/actions/task.action.js';
+import { completeProject } from '../store/actions/project.action.js';
 
 const ToDoScreen = ({navigation}) => {
   const dispatch = useDispatch()
   const projectTask = useSelector(state => state.tasks.filteredTask)
   const currentProject = useSelector(state => state.projects.selected)
-  const [itemText, setItemText] = useState("")
-  const [items, setItems] = useState([])
+  const currentTask = useSelector(state => state.tasks.selected)
+
   const [update, setUpdate] = useState(false);
+  const [itemText, setItemText] = useState("")
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
   const [deleteAll, setDeleteAll] = useState(false);
 
   useEffect(() => {
-    console.log(currentProject)
     dispatch(filteredTask(currentProject.id))
-    console.log(projectTask)
-    setUpdate(!update)
   }, [])
   
   const onChangeText = (text) => {
     setItemText(text)
   }
   
-  const addItemToList = () => {
-    const newItem = [...items, {id: Date.now(), name: itemText, completed: false}]
-    setItems(newItem)
+  const addTaskToList = () => {
+    const taskID = projectTask.length === 0 ? 1 : projectTask.slice(-1)[0].id+1
+    const newTask = {
+      id: taskID, 
+      name: itemText, 
+      projectID: currentProject.id,
+      status: false
+    }
+    dispatch(createTask(newTask))
     setItemText("")
   }
 
+  const completeAllTasks = () => {
+    projectTask.map(task => task.status = true)
+    dispatch(completeProject(currentProject.id))
+    navigation.goBack()
+  }
+
   const setCheck = (id, newValue) => {
-    const selectedCheckBoxes = items.find((checkbox) => checkbox.id === id);
-    selectedCheckBoxes.completed = newValue
+    const selectedCheckBox = projectTask.find((checkbox) => checkbox.id === id);
+    selectedCheckBox.status = newValue
+    if(projectTask.filter(task => !task.status).length === 0){
+      dispatch(completeProject(currentProject.id))
+    }
     setUpdate(!update)
   }
 
-  const openModal = (item, deleteAll) => {
+  const openModal = (taskID, deleteAll) => {
     setDeleteAll(deleteAll)
-    setSelectedItem(item);
+    dispatch(selectTask(taskID))
     setModalVisible(true);
   };
 
@@ -50,16 +63,14 @@ const ToDoScreen = ({navigation}) => {
     setModalVisible(false);
   };
 
-  const onDeleteModal = (id, deleteAll) => {
+  const onDeleteModal = (deleteAll) => {
     setModalVisible(false);
-    
     if(deleteAll) {
-      setItems([])
+      dispatch(removeAllTasks(currentProject.id))
     }
     else {
-      setItems((oldArray) => oldArray.filter((item) => item.id !== id));
+      dispatch(removeTask(currentTask.id))
     }
-    setSelectedItem(null);
   };
 
   return (
@@ -68,7 +79,7 @@ const ToDoScreen = ({navigation}) => {
       <ItemInput 
         onChangeText={onChangeText}
         itemText={itemText}
-        addItemToList={addItemToList}
+        addItemToList={addTaskToList}
       />
       <Divider/>
       {
@@ -76,7 +87,7 @@ const ToDoScreen = ({navigation}) => {
         <Card style={styles.card}>
           <View style={styles.buttonsContainer}>
             <Button onPress={() => openModal(null, true)} text="Clean" style={styles.buttonClean}/>
-            <Button onPress={() => navigation.goBack()} text="Complete" style={styles.buttonComplete}/>
+            <Button onPress={completeAllTasks} text="Complete" style={styles.buttonComplete}/>
           </View>
           <ListItem
             items={projectTask}
@@ -87,7 +98,7 @@ const ToDoScreen = ({navigation}) => {
         </Card>
       }
       <CustomModal 
-        selectedItem={selectedItem}
+        selectedItem={currentTask}
         onCancelModal={onCancelModal}
         onDeleteModal={onDeleteModal}
         modalVisible={modalVisible}

@@ -1,4 +1,4 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -7,8 +7,9 @@ import {COLORS} from '../constants/Colors'
 import {selectProject} from '../store/actions/project.action';
 
 const ProjectScreen = ({navigation}) => {
-  const projects = useSelector(state => state.projects.projects)
   const dispatch = useDispatch()
+  const projects = useSelector(state => state.projects.projects)
+  const currentProject = useSelector(state => state.projects.selected)
 
   const handleNavigation = (item) => {
     dispatch(selectProject(item.id))
@@ -21,16 +22,21 @@ const ProjectScreen = ({navigation}) => {
       data={projects}
       renderItem={project => {
         return (
-          <View style={styles.item}>
+          <TouchableOpacity onPress={() => handleNavigation(project.item)}>
+            <View style={styles.item}>
             <Text style={styles.itemText}>{project.item.title}</Text>
             {
               !project.item.status
-              && <Button onPress={() => handleNavigation(project.item)} text="Start"/>
+              ? <Text style={styles.inProgressTag}>In progress</Text>
+              : <Text style={styles.completeTag}>Completed</Text>
             }  
           </View>
+          </TouchableOpacity>
+          
         )
       }}
       keyExtractor={(project) => project.id}
+      extraData={currentProject?.status}
     />
     </View>
   )
@@ -59,4 +65,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderColor: COLORS.secondary,
   },
+  inProgressTag: {
+    color: COLORS.grey,
+    fontFamily: 'raleway',
+  },
+  completeTag: {
+    color: COLORS.primary,
+    fontFamily: 'raleway',
+  }
 })

@@ -6,7 +6,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import React from 'react'
 
 const Item = ({item, setCheck, openModal}) => {
-  const dynamicStyle = item.completed ? styles.itemChecked : styles.itemUnchecked
+  const dynamicStyle = item.status ? styles.itemChecked : styles.itemUnchecked
   
   return (
     <View 
@@ -18,19 +18,19 @@ const Item = ({item, setCheck, openModal}) => {
     >
       <View style={styles.row}>
         <BouncyCheckbox
-          isChecked={item.completed}
+          isChecked={item.status}
           size={20}
           fillColor={COLORS.primary}
           unfillColor="#FFFFFF"
           text={item.name}
           fontFamily="raleway"
-          innerIconStyle={{borderWidth: 2, borderColor: item.completed ? COLORS.primary : COLORS.secondary}}
+          innerIconStyle={{borderWidth: 2, borderColor: item.status ? COLORS.primary : COLORS.secondary}}
           onPress={(isChecked) => setCheck(item.id, isChecked)}
         />
       </View>
-      { item.completed
+      { item.status
         ? <FontAwesome name="calendar-check-o" size={24} color={COLORS.primary} />
-        : <Pressable style={styles.itemButton} onPress={() => openModal(item, false)}> 
+        : <Pressable style={styles.itemButton} onPress={() => openModal(item.id, false)}> 
             <FontAwesome name="trash" size={23} color={COLORS.danger}/>
           </Pressable>
       }
