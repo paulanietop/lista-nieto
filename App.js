@@ -4,6 +4,8 @@ import { StyleSheet, View } from 'react-native';
 import { useEffect, useState } from 'react';
 
 import MainNavigator from './src/navigators/MainNavigator';
+import { Provider } from 'react-redux';
+import store from './src/store';
 import { useFonts } from 'expo-font';
 
 export default function App() {
@@ -25,7 +27,9 @@ export default function App() {
     return null;
   }
   return (
-    <MainNavigator/>
+    <Provider store={store}>
+      <MainNavigator/>
+    </Provider>
   );
 }
 

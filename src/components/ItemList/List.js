@@ -18,7 +18,7 @@ const ListItem = ({items, update, setCheck, openModal}) => {
           </View>
         )
       }}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => item.id.toString()}
       extraData={update}
     />
   )

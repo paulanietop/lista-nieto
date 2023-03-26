@@ -1,18 +1,18 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { Button } from '../components/index'
 import {COLORS} from '../constants/Colors'
-import React from 'react'
+import {selectProject} from '../store/actions/project.action';
 
 const ProjectScreen = ({navigation}) => {
-  const projects = [
-    {id: 1, title: 'Work', status: false}, 
-    {id: 2, title: 'Personal', status: false},
-    {id: 3, title: '2023 Goals', status: false}
-  ]
+  const projects = useSelector(state => state.projects.projects)
+  const dispatch = useDispatch()
 
-  const handleNavigation = (title) => {
-    navigation.navigate('ToDo', { toDoName: title })
+  const handleNavigation = (item) => {
+    dispatch(selectProject(item.id))
+    navigation.navigate('ToDo', { toDoName: item.title })
   }
 
   return (
@@ -25,7 +25,7 @@ const ProjectScreen = ({navigation}) => {
             <Text style={styles.itemText}>{project.item.title}</Text>
             {
               !project.item.status
-              && <Button onPress={() => handleNavigation(project.item.title)} text="Start"/>
+              && <Button onPress={() => handleNavigation(project.item)} text="Start"/>
             }  
           </View>
         )
