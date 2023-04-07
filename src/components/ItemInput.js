@@ -6,7 +6,7 @@ import React from 'react'
 
 const ItemInput = ({placeholder, onChangeText, itemText, addItemToList, children}) => {
   return (
-    <View style={styles.container}>
+    <View>
       <View style={styles.row}>
         <TextInput
           style={styles.input}
@@ -29,9 +29,6 @@ const ItemInput = ({placeholder, onChangeText, itemText, addItemToList, children
 export default ItemInput
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
   row: {
     flexDirection: 'row', 
     justifyContent: 'space-between',

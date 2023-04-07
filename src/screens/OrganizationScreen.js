@@ -33,7 +33,10 @@ const OrganizationScreen = ({navigation}) => {
       </View>
       
       <View style={styles.menuRow}>
-        <TouchableOpacity style={styles.menuBox}>
+        <TouchableOpacity 
+          style={styles.menuBox}
+          onPress={() => navigation.navigate('PhotoJournal')}
+        >
           <Text style={styles.menuText}>Photo Journal</Text>
         </TouchableOpacity>
         
