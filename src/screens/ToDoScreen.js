@@ -77,6 +77,7 @@ const ToDoScreen = ({navigation}) => {
     <View style={styles.container}>
       
       <ItemInput 
+        placeholder="Add a task"
         onChangeText={onChangeText}
         itemText={itemText}
         addItemToList={addTaskToList}

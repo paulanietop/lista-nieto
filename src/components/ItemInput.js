@@ -4,27 +4,34 @@ import Button from './Button';
 import {COLORS} from '../constants/Colors';
 import React from 'react'
 
-const ItemInput = ({onChangeText, itemText, addItemToList}) => {
+const ItemInput = ({placeholder, onChangeText, itemText, addItemToList, children}) => {
   return (
-    <View style={styles.row}>
-      <TextInput
-        style={styles.input}
-        placeholder='Add a task'
-        onChangeText={onChangeText}
-        value={itemText}
-      />
-      <Button
-        style={styles.button}
-        onPress={addItemToList}
-        text="Add"
-      />
+    <View style={styles.container}>
+      <View style={styles.row}>
+        <TextInput
+          style={styles.input}
+          placeholder={placeholder}
+          onChangeText={onChangeText}
+          value={itemText}
+        />
+        <Button
+          style={styles.button}
+          onPress={addItemToList}
+          text="Add"
+        />
+      </View>
+      {children}
     </View>
+    
   )
 }
 
 export default ItemInput
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   row: {
     flexDirection: 'row', 
     justifyContent: 'space-between',

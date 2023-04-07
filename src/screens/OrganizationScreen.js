@@ -7,7 +7,10 @@ const OrganizationScreen = ({navigation}) => {
   return (
     <View style={styles.menuContainer}>
       <View style={styles.menuRow}> 
-        <TouchableOpacity style={styles.menuBox}>
+        <TouchableOpacity 
+          style={styles.menuBox}
+          onPress={() => navigation.navigate('My Budget')}
+        >
           <Text style={styles.menuText}>My Budget</Text>
         </TouchableOpacity>
 

@@ -1,4 +1,4 @@
-export const BUDGET = [
+export const BILLS = [
   {
     id: 1,
     expense: 200000,

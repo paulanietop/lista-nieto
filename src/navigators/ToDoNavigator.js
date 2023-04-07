@@ -1,3 +1,4 @@
+import BudgetScreen from '../screens/BudgetScreen';
 import { COLORS } from '../constants/Colors';
 import OrganizationScreen from '../screens/OrganizationScreen';
 import ProjectScreen from '../screens/ProjectScreen';
@@ -20,6 +21,7 @@ const ToDoNavigator = () => {
       }}
     >
       <Stack.Screen name="Organization" component={OrganizationScreen}/>
+      <Stack.Screen name="My Budget" component={BudgetScreen}/>
       <Stack.Screen name="Projects" component={ProjectScreen}/>
       <Stack.Screen name="ToDo" component={ToDoScreen}
         options={({route}) => ({
