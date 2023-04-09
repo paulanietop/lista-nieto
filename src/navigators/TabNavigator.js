@@ -1,8 +1,9 @@
 import { StyleSheet, View } from 'react-native';
 
 import { AntDesign } from '@expo/vector-icons';
+import BudgetNavigator from './BudgetNavigator';
 import { COLORS } from '../constants/Colors';
-import MetricScreen from '../screens/MetricScreen';
+import JournalNavigator from './JournalNavigator';
 import React from 'react'
 import ToDoNavigator from './ToDoNavigator';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -31,8 +32,8 @@ const TabNavigator = () => {
         }}
       />
       <BottomTabs.Screen
-        name="MetricNav"
-        component={MetricScreen}
+        name="JournalNav"
+        component={JournalNavigator}
         options={{
           tabBarIcon: ({ focused }) => (
             <View>
@@ -42,8 +43,8 @@ const TabNavigator = () => {
         }}
       />
       <BottomTabs.Screen
-        name="CalendarNav"
-        component={MetricScreen}
+        name="BudgetNav"
+        component={BudgetNavigator}
         options={{
           tabBarIcon: ({ focused }) => (
             <View>

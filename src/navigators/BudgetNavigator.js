@@ -1,15 +1,14 @@
+import BudgetScreen from '../screens/BudgetScreen';
 import { COLORS } from '../constants/Colors';
-import ProjectScreen from '../screens/ProjectScreen';
 import React from 'react'
-import ToDoScreen from '../screens/ToDoScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 
 const Stack = createNativeStackNavigator();
 
-const ToDoNavigator = () => {
+const BudgetNavigator = () => {
   return (
     <Stack.Navigator 
-      initialRouteName='Projects'
+      initialRouteName='My Budget'
       screenOptions={{
         headerStyle: {
           backgroundColor: COLORS.background,
@@ -18,15 +17,9 @@ const ToDoNavigator = () => {
         headerBackTitleVisible: false,
       }}
     >
-      
-      <Stack.Screen name="Projects" component={ProjectScreen}/>
-      <Stack.Screen name="ToDo" component={ToDoScreen}
-        options={({route}) => ({
-          title: route.params.toDoName
-        })}
-      />
+      <Stack.Screen name="My Budget" component={BudgetScreen}/>
     </Stack.Navigator>
   )
 }
 
-export default ToDoNavigator
+export default BudgetNavigator
