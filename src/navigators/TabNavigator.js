@@ -26,7 +26,7 @@ const TabNavigator = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View>
-              <AntDesign name="home" size={24} color={focused ? COLORS.primary : COLORS.grey} />
+              <AntDesign name="profile" size={24} color={focused ? COLORS.primary : COLORS.grey} />
             </View>
           )
         }}
@@ -37,7 +37,7 @@ const TabNavigator = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View>
-              <AntDesign name="barschart" size={26} color={focused ? COLORS.primary : COLORS.grey} />
+              <AntDesign name="camera" size={26} color={focused ? COLORS.primary : COLORS.grey} />
             </View>
           )
         }}
@@ -48,7 +48,7 @@ const TabNavigator = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View>
-              <AntDesign name="calendar" size={22} color={focused ? COLORS.primary : COLORS.grey} />
+              <AntDesign name="wallet" size={22} color={focused ? COLORS.primary : COLORS.grey} />
             </View>
           )
         }}
