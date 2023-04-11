@@ -11,9 +11,8 @@ const ImageSelector = ({onImage}) => {
 
   const verifyPermissions = async () => {
     const {status} = await ImagePicker.requestCameraPermissionsAsync()
-    console.log(status)
     if(status !== 'granted') {
-      Alert.alert('Permisos insuficientes')
+      Alert.alert('Camera access permission was denied')
       return false
     }
     return true

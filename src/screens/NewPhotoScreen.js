@@ -1,5 +1,5 @@
+import { Alert, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
-import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 
 import { Button } from '../components'
 import { COLORS } from '../constants/Colors'
@@ -13,16 +13,15 @@ const NewFormScreen = ({navigation}) => {
   const [description, setDescription] = useState('');
   const [imageValue, setImageValue] = useState('')
 
-  const isDataComplete = () => {
-    return title !== '' && description !== '' && imageValue !== '';
-  }
-
   const handleNewJournal = () => {
-    if(isDataComplete) {
-      console.log(title, description, imageValue)
-      dispatch(addJournal(title, description, imageValue))
-      navigation.navigate('PhotoJournal')
+    if(title === '' || description === '' || imageValue === '') {
+      var message = imageValue === '' ? 'Add an image' : 'Complete all the fields'
+      Alert.alert(message)
+      return false
     }
+    dispatch(addJournal(title, description, imageValue))
+    navigation.navigate('PhotoJournal')
+    return true
   }
 
   return (

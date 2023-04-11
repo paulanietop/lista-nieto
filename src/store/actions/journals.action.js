@@ -16,8 +16,6 @@ export const addJournal = (title, description, image) => {
         console.log(err.message)
         throw err
       }
-      console.log(title)
-      console.log(Path)
       dispatch({ type: ADD_JOURNAL, payload: {title, description, image: Path}})
     }
 }

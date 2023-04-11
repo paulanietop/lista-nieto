@@ -11,7 +11,7 @@ const PhotoScreen = () => {
     <Card style={styles.card}>
       <Image style={styles.image} source={{uri: data.item.image}} />
       <View style={styles.info}>
-        <Text style={styles.title}>{data.item.title} {console.log(JSON.stringify(data,null, 2))}</Text>
+        <Text style={styles.title}>{data.item.title}</Text>
         <Text style={styles.description}>{data.item.description}</Text>
       </View>
     </Card>
