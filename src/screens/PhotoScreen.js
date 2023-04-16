@@ -1,10 +1,13 @@
+import * as journalAction from '../store/actions/journals.action'
+
 import { FlatList, Image, StyleSheet, Text, View } from 'react-native'
+import React, {useEffect, useLayoutEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { Card } from '../components';
-import React from 'react'
-import { useSelector } from 'react-redux'
 
 const PhotoScreen = () => {
+  const dispatch = useDispatch()
   const journals = useSelector(state=>state.journals.journals)
 
   const renderPhotoItem = (data) => (
@@ -17,6 +20,9 @@ const PhotoScreen = () => {
     </Card>
   )
     
+  useEffect(() => {
+    dispatch(journalAction.loadJournal())
+  }, [])
 
   return (
     <FlatList
