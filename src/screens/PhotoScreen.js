@@ -1,7 +1,7 @@
 import * as journalAction from '../store/actions/journals.action'
 
 import { FlatList, Image, StyleSheet, Text, View } from 'react-native'
-import React, {useEffect, useLayoutEffect} from 'react'
+import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Card } from '../components';

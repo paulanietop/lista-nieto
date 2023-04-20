@@ -1,12 +1,10 @@
 import * as SplashScreen from 'expo-splash-screen';
 
-import { StyleSheet, View } from 'react-native';
-import { useEffect, useState } from 'react';
-
 import MainNavigator from './src/navigators/MainNavigator';
 import { Provider } from 'react-redux';
 import { init } from './db'
 import store from './src/store';
+import { useEffect } from 'react';
 import { useFonts } from 'expo-font';
 
 init()

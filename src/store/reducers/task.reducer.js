@@ -1,6 +1,4 @@
-import { CREATE_TASK, FILTERED_TASK, GET_TASKS, REMOVE_ALL_TASKS, REMOVE_TASK, SELECT_TASK, getTasks } from '../actions/task.action'
-
-import {TASK} from '../../data/todo'
+import { CREATE_TASK, FILTERED_TASK, GET_TASKS, REMOVE_ALL_TASKS, REMOVE_TASK, SELECT_TASK } from '../actions/task.action'
 
 const initialState = {
   tasks: [],

@@ -1,8 +1,7 @@
-import { FlatList, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Button } from '../components/index'
 import {COLORS} from '../constants/Colors'
 import { getTasks } from '../store/actions/task.action'
 import {selectProject} from '../store/actions/project.action';

@@ -1,6 +1,6 @@
 import { Button, Card, CustomModal, Divider, ItemInput, ListItem } from '../components/index.js';
 import { StyleSheet, View } from 'react-native'
-import { createTask, filteredTask, removeAllTasks, removeTask, selectTask, updateTask } from '../store/actions/task.action.js';
+import { createTask, filteredTask, removeTask, selectTask, updateTask } from '../store/actions/task.action.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
