@@ -1,6 +1,6 @@
 import { Button, Card, CustomModal, Divider, ItemInput, ListItem } from '../components/index.js';
 import { StyleSheet, View } from 'react-native'
-import { createTask, filteredTask, removeAllTasks, removeTask, selectTask } from '../store/actions/task.action.js';
+import { createTask, filteredTask, removeAllTasks, removeTask, selectTask, updateTask } from '../store/actions/task.action.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
@@ -39,7 +39,11 @@ const ToDoScreen = ({navigation}) => {
   }
 
   const completeAllTasks = () => {
-    projectTask.map(task => task.status = true)
+    projectTask.map(task => {
+      const selectedCheckBox = projectTask.find((checkbox) => checkbox.id === task.id);
+      selectedCheckBox.status = true
+      dispatch(updateTask(task.id, true))
+    })
     dispatch(completeProject(currentProject.id))
     navigation.goBack()
   }
@@ -47,6 +51,7 @@ const ToDoScreen = ({navigation}) => {
   const setCheck = (id, newValue) => {
     const selectedCheckBox = projectTask.find((checkbox) => checkbox.id === id);
     selectedCheckBox.status = newValue
+    dispatch(updateTask(id, newValue))
     if(projectTask.filter(task => !task.status).length === 0){
       dispatch(completeProject(currentProject.id))
     }
@@ -66,7 +71,7 @@ const ToDoScreen = ({navigation}) => {
   const onDeleteModal = (deleteAll) => {
     setModalVisible(false);
     if(deleteAll) {
-      dispatch(removeAllTasks(currentProject.id))
+      projectTask.forEach(task => dispatch(removeTask(task.id)))
     }
     else {
       dispatch(removeTask(currentTask.id))

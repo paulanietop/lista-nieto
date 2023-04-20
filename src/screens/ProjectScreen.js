@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { Button } from '../components/index'
 import {COLORS} from '../constants/Colors'
+import { getTasks } from '../store/actions/task.action'
 import {selectProject} from '../store/actions/project.action';
 
 const ProjectScreen = ({navigation}) => {
@@ -15,6 +16,10 @@ const ProjectScreen = ({navigation}) => {
     dispatch(selectProject(item.id))
     navigation.navigate('ToDo', { toDoName: item.title })
   }
+
+  useEffect(() => {
+    dispatch(getTasks())
+  }, [])
 
   return (
     <View style={styles.container}>
