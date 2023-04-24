@@ -19,7 +19,6 @@ const TaskReducer = (state = initialState, action) => {
         selected: state.tasks.find(task => task.id === action.taskID)
       }
     case FILTERED_TASK:
-      console.log(state)
       return {
         ...state,
         filteredTask: state.tasks.filter(task => task.projectID === action.projectID)

@@ -4,7 +4,7 @@ import Button from './Button';
 import {COLORS} from '../constants/Colors';
 import React from 'react'
 
-const ItemInput = ({placeholder, onChangeText, itemText, addItemToList, children}) => {
+const ItemInput = ({placeholder, onChangeText, itemText, addItemToList}) => {
   return (
     <View>
       <View style={styles.row}>
@@ -20,7 +20,6 @@ const ItemInput = ({placeholder, onChangeText, itemText, addItemToList, children
           text="Add"
         />
       </View>
-      {children}
     </View>
     
   )

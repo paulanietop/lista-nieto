@@ -20,7 +20,6 @@ export const addJournal = (title, description, image) => {
         throw err
       }
       const result = await insertJournal(title, description, Path)
-      console.log(result)
       dispatch({ type: ADD_JOURNAL, payload: {id: result.insertId, title, description, image: Path}})
     }
 }
@@ -29,7 +28,6 @@ export const loadJournal = () => {
   return async dispatch => {
     try {
       const result = await fetchJournal()
-      console.log(result)
       dispatch({type: LOAD_JOURNAL, journals: result.rows._array})
     }
     catch (error) {

@@ -9,7 +9,6 @@ const initialState = {
 const JournalsReducer = (state = initialState, action) => {
   switch(action.type) {
     case ADD_JOURNAL: 
-      console.log(action.payload.id)
       const newJournal = new Journal(action.payload.id.toString(), action.payload.title, action.payload.description, action.payload.image)
       return {
         ...state,

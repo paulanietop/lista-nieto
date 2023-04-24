@@ -21,8 +21,6 @@ export const getTasks = () => {
         ...result[key],
         id: key
       }))
-      console.log(result)
-      console.log(tasks)
       
       dispatch({type: GET_TASKS, payload: tasks})
     }
@@ -57,9 +55,6 @@ export const createTask = (task) => {
           status: task.status,
         })
       })
-
-      const result = await response.json()
-      console.log(result)
       
       dispatch({type: CREATE_TASK, task})
     }
@@ -90,8 +85,7 @@ export const removeTask = (taskID) => {
 export const updateTask = (taskID, newValue) => {
   return async dispatch => {
     try {
-      console.log(taskID, newValue)
-      const response = await fetch(`${URL_API}tasks/${taskID}.json`, {
+      await fetch(`${URL_API}tasks/${taskID}.json`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'applications/json',
@@ -100,13 +94,11 @@ export const updateTask = (taskID, newValue) => {
           status: newValue,
         })
       })
-
-      const result = await response.json()
-      console.log(result)
       
-      dispatch({type: UPDATE_TASK, task})
+      dispatch({type: UPDATE_TASK})
     }
     catch (error) {
+      console.log('Aqui')
       console.log(error.message)
     }
   }
