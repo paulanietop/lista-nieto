@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#e4d9c7"
-      }
+      },
+      "package": "com.pau503.listanieto"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e337eb58-48b3-46e0-aaa1-b1fb8be718c7"
+      }
     }
   }
 }
